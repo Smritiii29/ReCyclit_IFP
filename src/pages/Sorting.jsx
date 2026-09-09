@@ -1,21 +1,55 @@
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, CheckCircle2, RotateCcw } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./Sorting.css";
 
 function Sorting() {
   const navigate = useNavigate();
+  const [animationKey, setAnimationKey] = useState(0);
 
   // Temporary mock result.
-  // Later this will come from the YOLO model.
+  // Later this will come directly from the YOLO model.
   const result = {
     category: "Recyclable Plastic",
-    shortCategory: "recyclable",
+    type: "recyclable",
+    confidence: 94,
     description:
       "This item belongs in the recyclable plastic stream.",
   };
 
+  const bins = [
+    {
+      id: "recyclable",
+      label: "Recyclable Plastic",
+      symbol: "♻",
+    },
+    {
+      id: "nonrecyclable",
+      label: "Non-Recyclable",
+      symbol: "×",
+    },
+    {
+      id: "metal",
+      label: "Metal",
+      symbol: "●",
+    },
+    {
+      id: "organic",
+      label: "Organic",
+      symbol: "✦",
+    },
+  ];
+
   const handleContinue = () => {
     navigate("/learn");
+  };
+
+  const handleAgain = () => {
+    navigate("/analyze");
+  };
+
+  const handleReplay = () => {
+    setAnimationKey((currentKey) => currentKey + 1);
   };
 
   return (
@@ -23,7 +57,10 @@ function Sorting() {
       <section className="sorting-section">
         <div className="container">
 
-          {/* Header */}
+          {/* =========================================
+              HEADER
+              ========================================= */}
+
           <div className="sorting-header">
             <p className="sorting-eyebrow">SMART SORTING</p>
 
@@ -32,17 +69,22 @@ function Sorting() {
             </h1>
 
             <p className="sorting-description">
-              RecycLit has identified your waste. Now let's see where it
-              belongs.
+              RecycLit has identified your waste. Watch it find its way
+              to the right bin.
             </p>
           </div>
 
-          {/* Sorting stage */}
-          <div className="sorting-stage">
 
-            {/* Top status */}
+          {/* =========================================
+              SORTING MACHINE
+              ========================================= */}
+
+          <div className="sorting-machine">
+
+            {/* Top classification status */}
+
             <div className="sorting-status">
-              <div className="sorting-status-icon">
+              <div className="sorting-status-check">
                 <CheckCircle2 size={17} />
               </div>
 
@@ -52,147 +94,171 @@ function Sorting() {
               </div>
             </div>
 
-            {/* Waste item */}
-            <div className="sorting-object-area">
 
-              <div className="sorting-object-label">
-                YOUR WASTE
+            {/* =========================================
+                ANIMATION AREA
+                ========================================= */}
+
+            <div
+              key={animationKey}
+              className={`sorting-animation sorting-target--${result.type}`}
+            >
+
+              {/* "AI SORTING" label */}
+
+              <div className="sorting-machine-label">
+                <span className="sorting-pulse" />
+                AI SORTING
               </div>
 
-              <div className="sorting-object">
-                <div className="sorting-object-shape">
-                  ♻
+
+              {/* Waste object */}
+
+              <div className="sorting-waste">
+                <div className="sorting-waste-bottle">
+
+                  <div className="bottle-cap" />
+
+                  <div className="bottle-neck" />
+
+                  <div className="bottle-body">
+                    <span>♻</span>
+                  </div>
+
                 </div>
               </div>
 
-              {/* Vertical movement path */}
-              <div className="sorting-path">
-                <div className="sorting-path-line" />
-                <div className="sorting-arrow">↓</div>
+
+              {/* Flight trail */}
+
+              <div className="sorting-flight-trail">
+                <span />
+                <span />
+                <span />
+              </div>
+
+
+              {/* Target marker */}
+
+              <div className="sorting-target-marker">
+                <span>DROP HERE</span>
+                <div />
               </div>
 
             </div>
 
-            {/* Bins */}
+
+            {/* =========================================
+                BINS
+                ========================================= */}
+
             <div className="sorting-bins">
 
-              <div
-                className={`sorting-bin ${
-                  result.shortCategory === "recyclable"
-                    ? "sorting-bin--active"
-                    : ""
-                }`}
-              >
-                <div className="sorting-bin-lid" />
+              {bins.map((bin) => (
+                <div
+                  key={bin.id}
+                  className={`sorting-bin ${
+                    result.type === bin.id
+                      ? "sorting-bin--target"
+                      : ""
+                  }`}
+                >
 
-                <div className="sorting-bin-body">
-                  <span className="sorting-bin-icon">♻</span>
-                  <span className="sorting-bin-name">
-                    Recyclable Plastic
-                  </span>
-                </div>
+                  {/* Bin lid */}
 
-                {result.shortCategory === "recyclable" && (
-                  <div className="sorting-bin-check">
-                    <CheckCircle2 size={18} />
+                  <div className="sorting-bin-lid">
+                    <div className="sorting-bin-handle" />
                   </div>
-                )}
-              </div>
 
-              <div
-                className={`sorting-bin ${
-                  result.shortCategory === "nonrecyclable"
-                    ? "sorting-bin--active"
-                    : ""
-                }`}
-              >
-                <div className="sorting-bin-lid" />
 
-                <div className="sorting-bin-body">
-                  <span className="sorting-bin-icon">×</span>
-                  <span className="sorting-bin-name">
-                    Non-Recyclable
-                  </span>
-                </div>
+                  {/* Bin body */}
 
-                {result.shortCategory === "nonrecyclable" && (
-                  <div className="sorting-bin-check">
-                    <CheckCircle2 size={18} />
+                  <div className="sorting-bin-body">
+
+                    <div className="sorting-bin-symbol">
+                      {bin.symbol}
+                    </div>
+
+                    <span className="sorting-bin-label">
+                      {bin.label}
+                    </span>
+
                   </div>
-                )}
-              </div>
 
-              <div
-                className={`sorting-bin ${
-                  result.shortCategory === "metal"
-                    ? "sorting-bin--active"
-                    : ""
-                }`}
-              >
-                <div className="sorting-bin-lid" />
 
-                <div className="sorting-bin-body">
-                  <span className="sorting-bin-icon">●</span>
-                  <span className="sorting-bin-name">
-                    Metal
-                  </span>
+                  {/* Wheels */}
+
+                  <div className="sorting-wheel sorting-wheel--left" />
+                  <div className="sorting-wheel sorting-wheel--right" />
+
+
+                  {/* Target indicator */}
+
+                  {result.type === bin.id && (
+                    <div className="sorting-target-badge">
+                      <CheckCircle2 size={16} />
+                    </div>
+                  )}
+
                 </div>
-
-                {result.shortCategory === "metal" && (
-                  <div className="sorting-bin-check">
-                    <CheckCircle2 size={18} />
-                  </div>
-                )}
-              </div>
-
-              <div
-                className={`sorting-bin ${
-                  result.shortCategory === "organic"
-                    ? "sorting-bin--active"
-                    : ""
-                }`}
-              >
-                <div className="sorting-bin-lid" />
-
-                <div className="sorting-bin-body">
-                  <span className="sorting-bin-icon">✦</span>
-                  <span className="sorting-bin-name">
-                    Organic
-                  </span>
-                </div>
-
-                {result.shortCategory === "organic" && (
-                  <div className="sorting-bin-check">
-                    <CheckCircle2 size={18} />
-                  </div>
-                )}
-              </div>
+              ))}
 
             </div>
 
-            {/* Result message */}
-            <div className="sorting-result">
 
-              <p className="sorting-result-label">
+            {/* =========================================
+                SUCCESS STATE
+                ========================================= */}
+
+            <div className="sorting-success">
+
+              <div className="sorting-success-particles">
+                <span>✦</span>
+                <span>✧</span>
+                <span>✦</span>
+                <span>·</span>
+                <span>✧</span>
+              </div>
+
+              <p className="sorting-success-label">
                 SORTED SUCCESSFULLY
               </p>
 
               <h2>
                 Your waste belongs in the{" "}
-                <span>Recyclable Plastic</span> bin.
+                <span>{result.category}</span> bin.
               </h2>
 
-              <p>
+              <p className="sorting-success-description">
                 {result.description}
               </p>
 
-              <button
-                className="sorting-continue"
-                onClick={handleContinue}
-              >
-                Learn More About This Waste
-                <ArrowRight size={18} />
-              </button>
+              <div className="sorting-actions">
+
+                <button
+                  className="sorting-replay-button"
+                  onClick={handleReplay}
+                >
+                  <RotateCcw size={16} />
+                  See Animation Again
+                </button>
+
+                <button
+                  className="sorting-learn-button"
+                  onClick={handleContinue}
+                >
+                  Learn More About This Waste
+                  <ArrowRight size={18} />
+                </button>
+
+                <button
+                  className="sorting-again-button"
+                  onClick={handleAgain}
+                >
+                  Analyze another item
+                </button>
+
+              </div>
 
             </div>
 
