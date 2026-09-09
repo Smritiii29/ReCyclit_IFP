@@ -1,3 +1,4 @@
+import { useClassification } from "../ClassificationContext.jsx";
 import { ArrowLeft, ArrowRight, CheckCircle2, Leaf, Recycle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./Learn.css";
@@ -7,7 +8,8 @@ function Learn() {
 
   // Temporary mock category.
   // Later, this will come from the actual AI classification result.
-  const selectedCategory = "recyclable";
+  const { classification } = useClassification();
+  const selectedCategory = classification.type;
 
   // Educational information for all four supported waste categories.
   const wasteEducation = {
