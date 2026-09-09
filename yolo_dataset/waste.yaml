@@ -1,0 +1,10 @@
+names:
+- paper
+- plastic
+- glass
+- cardboard
+- metal
+- trash
+nc: 6
+train: C:\Users\Guruprakash Kamatchi\yolo_dataset\train\images
+val: C:\Users\Guruprakash Kamatchi\yolo_dataset\val\images
