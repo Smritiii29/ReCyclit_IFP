@@ -1,0 +1,658 @@
+/* =========================================
+   SORTING PAGE
+   ========================================= */
+
+.sorting-page {
+  min-height: calc(100vh - 80px);
+  background: var(--color-background);
+}
+
+.sorting-section {
+  padding: 4.5rem 0 6rem;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.sorting-header {
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+.sorting-eyebrow {
+  margin: 0 0 0.9rem;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+
+  color: var(--color-jade);
+}
+
+.sorting-title {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: -0.04em;
+
+  color: var(--color-charcoal);
+}
+
+.sorting-title span {
+  color: var(--color-jade);
+}
+
+.sorting-description {
+  max-width: 580px;
+  margin: 1.2rem auto 0;
+
+  font-size: 1.02rem;
+  line-height: 1.7;
+
+  color: var(--color-charcoal-soft);
+}
+
+
+/* =========================================
+   SORTING STAGE
+   ========================================= */
+
+.sorting-stage {
+  position: relative;
+
+  max-width: 1050px;
+  margin: 0 auto;
+
+  padding: 1.5rem;
+
+  background: var(--color-surface);
+
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-soft);
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   STATUS
+   ========================================= */
+
+.sorting-status {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+
+  width: fit-content;
+
+  padding: 0.65rem 0.9rem;
+
+  border-radius: 999px;
+
+  background: var(--color-jade-tint);
+  color: var(--color-jade-dark);
+}
+
+.sorting-status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sorting-status span {
+  display: block;
+
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.sorting-status strong {
+  display: block;
+
+  margin-top: 0.1rem;
+
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+}
+
+
+/* =========================================
+   WASTE OBJECT AREA
+   ========================================= */
+
+.sorting-object-area {
+  position: relative;
+
+  min-height: 370px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 2.5rem;
+}
+
+.sorting-object-label {
+  margin-bottom: 1rem;
+
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+
+  color: var(--color-charcoal-soft);
+}
+
+.sorting-object {
+  position: relative;
+  z-index: 3;
+
+  width: 110px;
+  height: 110px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 28px;
+
+  background: var(--color-jade-tint);
+
+  border: 1px solid rgba(0, 153, 138, 0.2);
+
+  box-shadow:
+    0 15px 35px rgba(22, 33, 31, 0.1),
+    0 0 0 12px rgba(0, 153, 138, 0.035);
+
+  animation: wasteFloat 2.5s ease-in-out infinite;
+}
+
+.sorting-object-shape {
+  width: 68px;
+  height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 20px;
+
+  background: var(--color-surface);
+
+  font-size: 2.5rem;
+
+  box-shadow: 0 8px 20px rgba(22, 33, 31, 0.08);
+}
+
+@keyframes wasteFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+
+/* =========================================
+   SORTING PATH
+   ========================================= */
+
+.sorting-path {
+  position: relative;
+
+  width: 100%;
+  height: 190px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.sorting-path-line {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  width: 2px;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      var(--color-jade-light) 0,
+      var(--color-jade-light) 7px,
+      transparent 7px,
+      transparent 14px
+    );
+
+  opacity: 0.7;
+}
+
+.sorting-arrow {
+  position: absolute;
+
+  top: 70px;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-jade-tint);
+  color: var(--color-jade);
+
+  font-size: 1.3rem;
+  font-weight: 700;
+
+  animation: arrowPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+
+/* =========================================
+   BINS
+   ========================================= */
+
+.sorting-bins {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1rem;
+
+  align-items: end;
+
+  padding: 0 1rem;
+}
+
+.sorting-bin {
+  position: relative;
+
+  min-height: 170px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
+}
+
+.sorting-bin:not(.sorting-bin--active) {
+  opacity: 0.52;
+}
+
+.sorting-bin--active {
+  opacity: 1;
+
+  transform: translateY(-8px);
+}
+
+
+/* Bin lid */
+
+.sorting-bin-lid {
+  width: 82%;
+
+  height: 13px;
+
+  border-radius: 7px 7px 3px 3px;
+
+  background: var(--color-charcoal);
+
+  transition:
+    width 0.35s ease,
+    background 0.35s ease;
+}
+
+.sorting-bin--active .sorting-bin-lid {
+  width: 92%;
+
+  background: var(--color-jade-dark);
+}
+
+
+/* Bin body */
+
+.sorting-bin-body {
+  width: 100%;
+  min-height: 145px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.7rem;
+
+  padding: 1rem;
+
+  border-radius: 8px 8px 16px 16px;
+
+  background: var(--color-sand);
+
+  border: 1px solid var(--color-sand-line);
+
+  text-align: center;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.sorting-bin--active .sorting-bin-body {
+  background: var(--color-jade-tint);
+
+  border-color: var(--color-jade-light);
+
+  box-shadow:
+    0 14px 30px rgba(0, 153, 138, 0.12),
+    0 0 0 5px rgba(0, 153, 138, 0.04);
+}
+
+
+/* Bin icon */
+
+.sorting-bin-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: var(--color-surface);
+
+  font-size: 1.55rem;
+  font-weight: 700;
+
+  color: var(--color-charcoal);
+
+  box-shadow: 0 5px 14px rgba(22, 33, 31, 0.06);
+}
+
+.sorting-bin--active .sorting-bin-icon {
+  color: var(--color-jade-dark);
+}
+
+
+/* Bin name */
+
+.sorting-bin-name {
+  max-width: 130px;
+
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.3;
+
+  color: var(--color-charcoal);
+}
+
+
+/* Active check */
+
+.sorting-bin-check {
+  position: absolute;
+
+  top: -8px;
+  right: 3px;
+
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-jade);
+  color: white;
+
+  box-shadow: 0 5px 12px rgba(0, 153, 138, 0.25);
+
+  animation: checkAppear 0.5s ease both;
+}
+
+@keyframes checkAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* =========================================
+   RESULT MESSAGE
+   ========================================= */
+
+.sorting-result {
+  max-width: 650px;
+
+  margin: 2.5rem auto 0;
+  padding-top: 2.5rem;
+
+  text-align: center;
+
+  border-top: 1px solid var(--color-line);
+}
+
+.sorting-result-label {
+  margin: 0 0 0.65rem;
+
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+
+  color: var(--color-jade);
+}
+
+.sorting-result h2 {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-weight: 700;
+  line-height: 1.2;
+
+  color: var(--color-charcoal);
+}
+
+.sorting-result h2 span {
+  color: var(--color-jade);
+}
+
+.sorting-result > p {
+  max-width: 540px;
+
+  margin: 0.9rem auto 0;
+
+  font-size: 0.9rem;
+  line-height: 1.6;
+
+  color: var(--color-charcoal-soft);
+}
+
+
+/* =========================================
+   CONTINUE BUTTON
+   ========================================= */
+
+.sorting-continue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+
+  margin-top: 1.5rem;
+
+  padding: 0.9rem 1.3rem;
+
+  border: none;
+  border-radius: var(--radius-sm);
+
+  background: var(--color-charcoal);
+  color: white;
+
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.sorting-continue:hover {
+  background: var(--color-jade-dark);
+  transform: translateY(-2px);
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 850px) {
+  .sorting-bins {
+    gap: 0.6rem;
+    padding: 0;
+  }
+
+  .sorting-bin-name {
+    font-size: 0.72rem;
+  }
+
+  .sorting-bin-body {
+    padding: 0.7rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .sorting-section {
+    padding: 3.5rem 0 4rem;
+  }
+
+  .sorting-stage {
+    padding: 1rem;
+  }
+
+  .sorting-object-area {
+    min-height: 300px;
+  }
+
+  .sorting-path {
+    height: 140px;
+  }
+
+  .sorting-bins {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .sorting-bin {
+    min-height: 150px;
+  }
+
+  .sorting-bin-body {
+    min-height: 125px;
+  }
+}
+
+@media (max-width: 450px) {
+  .sorting-title {
+    font-size: 2.7rem;
+  }
+
+  .sorting-object {
+    width: 90px;
+    height: 90px;
+  }
+
+  .sorting-object-shape {
+    width: 58px;
+    height: 58px;
+    font-size: 2rem;
+  }
+
+  .sorting-bins {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+
+  .sorting-bin-body {
+    min-height: 115px;
+  }
+
+  .sorting-bin-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .sorting-bin-name {
+    font-size: 0.68rem;
+  }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .sorting-object,
+  .sorting-arrow,
+  .sorting-bin-check {
+    animation: none;
+  }
+
+  .sorting-bin,
+  .sorting-bin-lid,
+  .sorting-bin-body,
+  .sorting-continue {
+    transition: none;
+  }
+
+  .sorting-continue:hover {
+    transform: none;
+  }
+}
